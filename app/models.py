@@ -18,8 +18,8 @@ class User(UserMixin,db.Model):
     profile_pic_path = db.Column(db.String())
     pass_secure = db.Column(db.String(255))
 
-    # pitches = db.relationship('Pitch',backref = 'author',lazy="dynamic") 
-    # comments = db.relationship('Comment', backref = 'author',lazy = "dynamic")
+    blogs = db.relationship('Blogs',backref = 'author',lazy="dynamic") 
+    comments = db.relationship('Comment', backref = 'author',lazy = "dynamic")
     
     def save_user(self, user):
         db.session.add(user)
@@ -39,3 +39,50 @@ class User(UserMixin,db.Model):
 
     def __repr__(self):
         return f'User {self.username} {self.bio} {self.email}'
+
+class Blog(db.Model):
+    
+    __tablename__ = 'blog'
+
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(255))
+    date_of_pitch = db.Column(db.DateTime,default=datetime.utcnow)
+    content = db.Column(db.String(255))
+    category = db.Column(db.String(255))
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    comments = db.relationship('Comment',backref = 'blog',lazy="dynamic")
+    
+
+    def save_blog(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_blog(cls,id):
+        blogs = Blog.query.filter_by(blog_id=id).all()
+        return blogs 
+
+    def __repr__(self):
+        return f'Blog {self.title}'
+
+class Comment(db.Model):
+
+    __tablename__= 'comments'
+
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(255))
+    comment = db.Column(db.String(255))
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    blog_id = db.Column(db.Integer,db.ForeignKey('blog.id'))
+
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_comment(cls,id):
+        comments = Comment.query.filter_by(comment_id=id).all()
+        return comments     
+
+    def __repr__(self):
+        return f'Comment{self.title}'            
