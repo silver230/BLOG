@@ -19,7 +19,7 @@ class User(UserMixin,db.Model):
     pass_secure = db.Column(db.String(255))
 
     # pitches = db.relationship('Pitch',backref = 'author',lazy="dynamic") 
-    comments = db.relationship('Comment', backref = 'author',lazy = "dynamic")
+    # comments = db.relationship('Comment', backref = 'author',lazy = "dynamic")
     
     def save_user(self, user):
         db.session.add(user)
