@@ -1,9 +1,15 @@
 from flask import Flask
 from config import config_options
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager 
+
+login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+login_manager.login_view = 'auth.login'
 
 
 db = SQLAlchemy()
+
 def create_app(config_name):
     
     app = Flask(__name__)
@@ -12,6 +18,7 @@ def create_app(config_name):
 
     #  intializing
     db.init_app(app)
+    login_manager.init_app(app)
 
     # registering the main app blueprint
     from .main import main as main_blueprint
