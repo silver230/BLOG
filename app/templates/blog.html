@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+  <button type="button" class="btn btn-outline-primary"><a href="/blog/new">add BLOGS</a></button>
+   <div class="card-header"><h5>{{ blog.title }}</h5>
+
+
+    <p class="card-text">{{blog.content}}</p>
+
+{% endblock %}
