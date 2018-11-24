@@ -15,7 +15,7 @@ app = Flask(__name__)
 def index():
     
     title = 'Get started with a blog'
-    blogs= blog.query.all()
+    blogs= Blog.query.all()
 
     return render_template('index.html', title= title,blogs=blogs)
 
@@ -97,15 +97,15 @@ def blog(blog_id):
     form = CommentForm()
 
     if form.validate_on_submit():
-        title = form.title.data 
+     
         comment = form.comment.data 
-        new_blog_comment = Comment(title = title,comment=comment,blog_id = blog_id)
+        new_blog_comment = Comment(comment=comment,blog_id = blog_id)
 
         db.session.add(new_blog_comment) 
         db.session.commit()
 
     comments = Comment.query.filter_by(blog_id=blog_id)
-    return render_template('comment_blog.html', title = 'blog', blog =blog, blog_form = form, comments = comments) 
+    return render_template('comments.html', title = 'blog', blog =blog, blog_form = form, comments = comments) 
 
 
 
