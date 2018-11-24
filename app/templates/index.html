@@ -2,29 +2,23 @@
 
 
 {% block content%}
-
-<div class="container" style="padding-top:70px;">
-
-    <h4><p><a href="/blog/new">ADD BLOG</a></p>
-    </h4>
-    <div class="row">
-
+    
+    <div style="background-image:url(https://bizztor.com/in/wp-content/uploads/sites/11/2018/04/Entrepreneur-Blogs.jpg);
+    display:cover;font-size: 20px;text-align: center">
+    <!-- <img src="" width="800px"> -->
+    <h1>welcome to blog</h1>
+    
         {% for blog in blogs %}
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
                     <h4>Category: {{ blog.category }}</h4>
-                </div>
-                <div class="panel-body">
+                
                     <p> {{ blog.title }}</p>
                     <p>{{ blog.content }} </p>
                     <p>{{ blog.date_of_blog }}</p>
-                    <div class="panel-footer">Add a comment <a href="/blog/{{blog.id}}">Hhere you go</a></div>
-                </div>
-            </div>
-        </div>
+                    <a href="/blog/{{blog.id}}">COMMENT</a>
+                </
         {% endfor %}
-
-    </div>
+       
+    
 </div>
+    <p class="btn-group-lg"><a href="/blog/new">ADD BLOG</a></p>
 {% endblock content%}
