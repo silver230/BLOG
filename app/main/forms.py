@@ -3,10 +3,10 @@ from wtforms import StringField,TextAreaField,SubmitField,SelectField
 from wtforms.validators import Required
 
 class BlogForm(FlaskForm):
-    title = StringField('MinutePitch title',validators=[Required()])
-    content = StringField('content',validators=[Required()])
+    title = StringField('Blog title',validators=[Required()])
+    content = StringField('lets talk about it',validators=[Required()])
     category = SelectField('Category', choices=[('Choose Category', 'Choose Category'),('Love', 'Love'),('business', 'business '),('Interview ', 'Interview'),('Politics', 'Politics')])
-    review = TextAreaField('pitch review', validators=[Required()])
+    review = TextAreaField('Blog review', validators=[Required()])
     submit = SubmitField('Submit')
  
 class UpdateProfile(FlaskForm):
@@ -14,7 +14,5 @@ class UpdateProfile(FlaskForm):
     submit = SubmitField('Submit')
 
 class CommentForm(FlaskForm):
-
-    title = StringField('Comment title',validators=[Required()])
     comment = TextAreaField('comment', validators=[Required()])
     submit = SubmitField('Submit')
